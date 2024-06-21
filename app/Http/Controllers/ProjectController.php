@@ -22,35 +22,40 @@ class ProjectController extends AppBaseController
     /** @var ProjectRepository $projectRepository*/
     private $projectRepository;
 
-    public function __construct(ProjectRepository $projectRepo)
-    {
-        $this->middleware('permission:project.index', ['only' => ['index','show']]);
-        $this->middleware('permission:project.create', ['only' => ['create','store']]);
-        $this->middleware('permission:project.edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:project.destroy', ['only' => ['destroy']]);
-        $this->projectRepository = $projectRepo;
-    }
+    // public function __construct(ProjectRepository $projectRepo)
+    // {
+    //     // $this->middleware('permission:project.index', ['only' => ['index','show']]);
+    //     // $this->middleware('permission:project.create', ['only' => ['create','store']]);
+    //     // $this->middleware('permission:project.edit', ['only' => ['edit','update']]);
+    //     // $this->middleware('permission:project.destroy', ['only' => ['destroy']]);
+    //     $this->projectRepository = $projectRepo;
+    // }
 
     /**
      * Display a listing of the Project.
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        if ($user->hasRole('super-admin')) {
-            $projects = $this->projectRepository->paginate(20);
-        }
+        // // if ($user->hasRole('super-admin')) {
+        //     $projects = $this->projectRepository->paginate(20);
+        // // }
         
-        if ($user->hasRole('user')) {
-            $projects = $user->projects()->paginate(20);
-        }
+        // // if ($user->hasRole('user')) {
+        //     $projects = $user->projects()->paginate(20);
+        // // }
 
-         // Pastikan hanya menggunakan with jika $projects tidak null
-        if ($projects) {
-            $projects->load('contributors');
-        }
+        //  // Pastikan hanya menggunakan with jika $projects tidak null
+        // if ($projects) {
+        //     $projects->load('contributors');
+        // }
 
+        
+
+        $users = User::paginate(10);
+
+        return view('users.index')->with('users', $users);
         return view('projects.index', compact('projects','user'));
     }
 

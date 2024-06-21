@@ -28,53 +28,6 @@
 <body>
 <div class="page-wrapper">
     @include('landing.layout.header')
-    <div class="content-wrapper">
-        <div class="content-main animate">
-            <div class="container">
-                <h1 class="font-size-90">Sispaka</h1>
-                <h2 class="opacity-60">Create an Expert System Without Code</h2>
-                <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
-                    <form class="form" action="{{ route('blogs') }}">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search Expert System">
-                            <span class="input-group-btn">
-                                <button class="btn" type="submit"><i class="arrow_right"></i></button>
-                            </span>
-                        </div>
-                        <p class="note"><b> Don't let your research results just become unreadable paper </b></p>
-                    </form>
-
-                    <!--end form-->
-                </div>
-                <!--end col-md-10-->
-            </div>
-            <!--end container-->
-        </div>
-        <!--end content-main-->
-        <div class="background-wrapper">
-            <div id="background-content">
-                <ul class="parallax" id="scene">
-                    <li class="layer opacity-90" data-depth="0.80"><img src="{{ asset('landing2/img/parallax-4.svg') }} " alt=""></li>
-                    <li class="layer opacity-90" data-depth="0.60"><img src="{{ asset('landing2/img/parallax-3.svg') }}" alt=""></li>
-                    <li class="layer opacity-90" data-depth="0.40"><img src="{{ asset('landing2/img/parallax-2.svg') }}" alt=""></li>
-                    <li class="layer opacity-90" data-depth="0.20"><img src="{{ asset('landing2/img/parallax-1.svg') }}" alt=""></li>
-                </ul>
-            </div>
-        </div>
-        <!--end background-wrapper-->
-    </div>
-    <!--end content-wrapper-->
-    <footer>
-        <div class="social-icons animate">
-            {{-- <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-youtube"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-            <a href="#"><i class="fa fa-pinterest"></i></a>
-            <a href="#"><i class="fa fa-google-plus"></i></a> --}}
-        </div>
-        <!--end social-icons-->
-    </footer>
     
 </div>
 <!--end page-wrapper-->
@@ -89,7 +42,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="main-btn-holder">
-                    <a href="{{ route('blogs') }}" class="hbtn hbtn-default">View more</a>
+                    {{-- <a href="{{ route('blogs') }}" class="hbtn hbtn-default">View more</a> --}}
                 </div>
             </div>
         </div>
@@ -99,11 +52,12 @@
                 <div class="row">
             @endif
             <div class="col-sm-6 col-md-4">
-                <div class="post-box blue-bg" style="background-image: url('{{ $project->getFirstMediaUrl('thumbnail') }}'); background-size: cover; background-position: center;">
+                <div class="post-box blue-bg" style="background-image: url('{{ $project['foto'] }}'); background-size: cover; background-position: center;">
                     <div class="post-img"></div>
-                    <span class="badge badge-danger">{{ $project->methods[0]->name }}</span>
-                    <div class="post-title">{{ $project->title }}</div>
-                    <div class="post-link"><a href="{{ route('blog', $project->slug) }}">Try Expert System</a></div>
+                    <span class="badge badge-danger">{{ $project['judul']}}</span>
+                    <div class="post-title">{{ $project['judul']}}</div>
+                    {{-- <div class="post-link"><a href="{{ route('blog', $project['slug']) }}">Baca</a></div> --}}
+                    <div class="post-link"><a href="">Baca</a></div>
                 </div>
             </div>
             @php $counter++; @endphp

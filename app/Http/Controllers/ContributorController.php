@@ -19,10 +19,6 @@ class ContributorController extends AppBaseController
 
     public function __construct(ContributorRepository $contributorRepo)
     {
-        $this->middleware('permission:contributor.index', ['only' => ['index','show']]);
-        $this->middleware('permission:contributor.create', ['only' => ['create','store']]);
-        $this->middleware('permission:contributor.edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:contributor.destroy', ['only' => ['destroy']]);
         $this->contributorRepository = $contributorRepo;
     }
 

@@ -12,17 +12,30 @@ use App\Models\BackwardChaining\BcRuleCode;
 use Auth;
 use Flash;
 use App\Http\Controllers\BackwardChaining\BackwardChaningTryController;
+use Illuminate\Support\Facades\Http;
 
 class LandingController extends Controller
 {
     function index() {
-        $projects = Project::where('status_publish','yes')->inRandomOrder()->take(6)->get();
+        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJkNjM3YjY0ZmM3YzU4MzkxMmFkYTA2NDEyZjBjZDVmY2Y5YTM4ZDYzYmFjMDhlZTE1NDZiZmM5MmViNzBkOTFmZWE3NDY3OGFiOTBiYzExIn0.eyJhdWQiOiIzIiwianRpIjoiMmQ2MzdiNjRmYzdjNTgzOTEyYWRhMDY0MTJmMGNkNWZjZjlhMzhkNjNiYWMwOGVlMTU0NmJmYzkyZWI3MGQ5MWZlYTc0Njc4YWI5MGJjMTEiLCJpYXQiOjE3MTg5NDExMDEsIm5iZiI6MTcxODk0MTEwMSwiZXhwIjoxNzUwNDc3MTAxLCJzdWIiOiI4MTgiLCJzY29wZXMiOlsic2FyYW5hLW9sYWhyYWdhIiwiYmVyaXRhX3BwaWQiXX0.gTUwHsvVxaMd6CuBctNO5q1rMw4_bEdJyIJp5OHqgaGidBC9lzFTqo8f3mueeQzYbea6vCRRt4eDawAmnoStxbouev7qRMe4bkegqvA50BdbTlWGvoSMijxRrb7gLGJZ4i2-IWxzsB0cjvlPRPwTMDe4S8_tX43oDc-LhVZ-jz6s18vf3rqguvY9C4dndQHr2_2CtFArqZTcoL1DMuZ1dhqKFsc9PZle-FlyrqKKNDT_m3HnNYnBMkPM2S9v2MFDKmwgiQsNdINi-vibRq7ZTJBQh8ebs2ZlKOO8k7pDEfUVwYFoySdT84NEmv54YgrRx3kOoGjK2DIiTxp1Fj8R7bJkRRw1RPP_tL3VKPP6dfUEMZFpIT5m4INkVwupcPm1d_IeGQ5UgOlaN9eijZH62uS8b1h23xg-7NQEsodUamQzoF8NwJ-b-OwH5vyERnqBhJF2Fg_XqIrVGuqxYcMN_0BfY8Ew72Zo-F4-3_C1NMcTjxYAeGSy7goccTZi36WfMV9EdHvLFrUcCkA8HroghKd4bYNnailHR5A2YQ_6lmpg47OK2RsQkPjXzoiOlXYDpoiNR0X71Sczj-AXxFsoUz0yX618ee0SKhiffs16E3RDavqLNwzw9-IRGn_yaP24RQkEiLilDB8TDC6msWZvvrVwRmsceKCw8MrH5FF7law'; // Ganti dengan token yang sebenarnya
+        $response = Http::withToken($token)->get('http://api.samarindakota.go.id/api/v2/generate/ppid-samarinda/berita_ppid');
+        // return $response;
+        // if ($response->successful()) {
+        //     $data = $response->json();
+        //     return response()->json($data);
+        // } else {
+        //     return response()->json(['error' => 'Request failed'], $response->status());
+        // }
+         $data = $response->json();
 
+        //  return $data['data'];
+        $projects = $data['data'];
         return view('landing.index', compact('projects'));
     }
     
     function blogs(Request $request) {
 
+        return redirect(route('/'));
         if ($request->has('search')) {
             $projects = Project::where('status_publish','yes')->where('title', 'like', '%'.$request->search.'%')->get();
         }else {

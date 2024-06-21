@@ -21,7 +21,7 @@ Route::get('storage-link', function () {
 });
 
 Auth::routes();
-
+//df
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
     Route::get('/homx', [App\Http\Controllers\HomeController::class, 'home'])->name('homex');
